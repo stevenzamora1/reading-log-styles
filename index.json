@@ -1,0 +1,89 @@
+{
+  "api": 1,
+  "styles": [
+    {
+      "id": "cute",
+      "builtin": true,
+      "name": "Cute",
+      "names": {
+        "es": "Tierno",
+        "fr": "Mignon",
+        "pt_br": "Fofo",
+        "it": "Carino",
+        "uk": "Милий"
+      },
+      "description": "Hearts instead of rings, a flower for the challenge, a garden for the book club and pastel notes. Built into Reading Log.",
+      "descriptions": {
+        "es": "Corazones en lugar de anillos, una flor para el reto, un jardín para el club de lectura y notas pastel. Incluido en Reading Log.",
+        "fr": "Des cœurs à la place des anneaux, une fleur pour le défi, un jardin pour le club de lecture et des notes pastel. Inclus dans Reading Log.",
+        "pt_br": "Corações no lugar dos anéis, uma flor para o desafio, um jardim para o clube do livro e notas em tons pastel. Incluído no Reading Log.",
+        "it": "Cuori al posto degli anelli, un fiore per la sfida, un giardino per il club del libro e note pastello. Incluso in Reading Log."
+      },
+      "author": "Steven"
+    },
+    {
+      "id": "cyber",
+      "builtin": true,
+      "name": "Cyber",
+      "names": {
+        "es": "Cyber",
+        "fr": "Cyber",
+        "pt_br": "Cyber",
+        "it": "Cyber",
+        "uk": "Кібер"
+      },
+      "description": "A black page in neon yellow and cyan, segmented rings, readouts and a skyline. Built into Reading Log.",
+      "descriptions": {
+        "es": "Una página negra en amarillo y cian neón, anillos segmentados, pantallas de datos y un horizonte urbano. Incluido en Reading Log.",
+        "fr": "Une page noire en jaune et cyan néon, des anneaux segmentés, des écrans de données et une skyline. Inclus dans Reading Log.",
+        "pt_br": "Uma página preta em amarelo e ciano neon, anéis segmentados, painéis de dados e um horizonte de cidade. Incluído no Reading Log.",
+        "it": "Una pagina nera in giallo e ciano neon, anelli a segmenti, schermate di dati e uno skyline. Incluso in Reading Log."
+      },
+      "author": "Steven"
+    },
+    {
+      "id": "academia",
+      "builtin": true,
+      "name": "Dark Academia",
+      "names": {
+        "es": "Dark Academia",
+        "fr": "Dark Academia",
+        "pt_br": "Dark Academia",
+        "it": "Dark Academia",
+        "uk": "Темна академія"
+      },
+      "description": "Parchment cards in a serif, brass and oxblood, a pocket watch for the rings and a chess game for the challenge. Built into Reading Log.",
+      "descriptions": {
+        "es": "Tarjetas de pergamino con letra serif, latón y burdeos, un reloj de bolsillo para los anillos y una partida de ajedrez para el reto. Incluido en Reading Log.",
+        "fr": "Des cartes en parchemin et en empattement, laiton et bordeaux, une montre de poche pour les anneaux et une partie d’échecs pour le défi. Inclus dans Reading Log.",
+        "pt_br": "Cartões de pergaminho em letra serifada, latão e bordô, um relógio de bolso para os anéis e uma partida de xadrez para o desafio. Incluído no Reading Log.",
+        "it": "Schede di pergamena con caratteri graziati, ottone e bordeaux, un orologio da tasca per gli anelli e una partita a scacchi per la sfida. Incluso in Reading Log."
+      },
+      "author": "Steven"
+    },
+    {
+      "id": "christmas",
+      "version": "1.0",
+      "api": 1,
+      "name": "Christmas",
+      "names": {
+        "es": "Navidad",
+        "fr": "Noël",
+        "pt_br": "Natal",
+        "it": "Natale"
+      },
+      "description": "A wreath for the rings, candy canes for the bars and a snowflake for the challenge, on a deep green page.",
+      "descriptions": {
+        "es": "Una corona para los anillos, bastones de caramelo para las barras y un copo de nieve para el reto, sobre una página verde oscuro.",
+        "fr": "Une couronne pour les anneaux, des sucres d’orge pour les barres et un flocon pour le défi, sur une page vert sapin.",
+        "pt_br": "Uma guirlanda para os anéis, bengalas de doce para as barras e um floco de neve para o desafio, sobre uma página verde-escura.",
+        "it": "Una ghirlanda per gli anelli, bastoncini di zucchero per le barre e un fiocco di neve per la sfida, su una pagina verde scuro."
+      },
+      "author": "Steven",
+      "files": [
+        "style.lua",
+        "draw.lua"
+      ]
+    }
+  ]
+}
