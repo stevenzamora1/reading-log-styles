@@ -8,7 +8,6 @@ local IVY, LILAC, LILAC_DEEP = { 119, 102, 153 }, { 187, 153, 238 }, { 136, 102,
 local SILVER, IRON = { 204, 187, 204 }, { 136, 119, 153 }
 local FLAME, FLAME_IN = { 238, 170, 51 }, { 255, 238, 153 }
 local WHITE = { 255, 255, 255 }
-local ARROW = { 238, 51, 85 }   -- a touch lighter, for greyscale screens
 
 -- the petals' shades, from the heart of the rose out
 local ROSE = { WINE, DEEP, { 170, 34, 60 }, CRIMSON, BRIGHT }
@@ -563,19 +562,13 @@ local DRIPS = { { 0.07, 0.2, 0.05 }, { 0.19, 0.11, 0.04 }, { 0.33, 0.3, 0.055 },
 local function blood(c, x, y, w, h)
     local band = max(2, h * 0.035)
     c:rect(floor(x), floor(y), floor(w), floor(band), DEEP)
-    -- a wavy edge under the band
-    local r = band * 0.8
-    local n = max(3, floor(w / (r * 1.7)))
-    for i = 0, n do c:disc(x + w * i / n, y + band, r * (0.7 + 0.3 * ((i * 7) % 3) / 2), DEEP) end
     for _, d in ipairs(DRIPS) do
         local dw = max(2, w * d[3])
         local dx = x + w * d[1]
         local len = max(band * 2, h * d[2])
         c:rect(floor(dx - dw / 2), floor(y), max(2, floor(dw)), floor(len), DEEP)
-        c:disc(dx, y + len, dw * 0.85, DEEP)
-        -- a little shine down the drip and on the drop
+        -- a little shine down the drip
         c:rect(floor(dx - dw * 0.3), floor(y + band), max(1, floor(dw * 0.22)), floor(len * 0.75), CRIMSON)
-        c:disc(dx - dw * 0.3, y + len - dw * 0.15, max(1, dw * 0.22), mix(CRIMSON, WHITE, 0.45))
     end
 end
 
@@ -673,47 +666,51 @@ end
 
 -- ─── progress bars: a crimson arrow ──────────────────────────────────────────
 
+-- Barbed wire: two strands twisting round each other, a barb every so
+-- often. The read part is red; the rest waits, faint.
+local function wire(c, x0, x1, mid, h, col, lw, from)
+    if x1 - x0 < 1 then return end
+    local amp = h * 0.2
+    local per = h * 1.6
+    local n = max(2, floor((x1 - x0) / 2))
+    for strand = 0, 1 do
+        local pts = {}
+        for i = 0, n do
+            local xx = x0 + (x1 - x0) * i / n
+            pts[#pts + 1] = xx
+            pts[#pts + 1] = mid + amp * sin((xx - from) / per * 2 * pi + strand * pi)
+        end
+        c:polyline(pts, lw, col)
+    end
+end
+
+local function barb(c, bx, mid, h, col, lw)
+    local a = h * 0.55
+    c:polyline({ bx - a * 0.6, mid - a, bx + a * 0.6, mid + a }, lw, col)
+    c:polyline({ bx + a * 0.6, mid - a, bx - a * 0.6, mid + a }, lw, col)
+    c:disc(bx, mid, lw * 1.1, col)
+end
+
 function D.bar(c, x, y, w, h, frac, tone, fill)
     frac = max(0, min(1, frac or 0))
     local mid = y + h / 2
-    local th = max(2, floor(h * 0.5))
-    c:rrect(x, floor(mid - th / 2), w, th, th / 2, tone.track)
-    local gap = max(10, h * 2.4)
-    local tw = max(1, floor(h * 0.16))
-    local tx = x + gap
-    while tx < x + w - 2 do
-        c:rect(floor(tx), floor(mid - h * 0.4), tw, max(2, floor(h * 0.8)), tone.track)
-        tx = tx + gap
+    local lw = max(1, h * 0.17)
+    local gap = max(12, h * 3.2)
+    local e = x + w * frac
+    -- the wire still to go
+    wire(c, max(x, e - lw), x + w, mid, h, tone.track, lw, x)
+    local bx = x + gap * 0.5
+    while bx < x + w do
+        if bx > e then barb(c, bx, mid, h, tone.track, lw) end
+        bx = bx + gap
     end
     if frac <= 0 then return end
-    local e = x + w * frac
-    local hh = max(4, h * 0.95)
-    local hl = hh * 1.6
-    local shaft_end = max(x + 1, e - hl * 0.6)
-    local sh = max(2, floor(h * 0.7))
-    c:rrect(x, floor(mid - sh / 2), max(2, floor(shaft_end - x)), sh, sh / 2, ARROW, tone.track)
-    tx = x + gap
-    while tx < shaft_end - 2 do
-        c:rect(floor(tx), floor(mid - h * 0.65), tw, max(2, floor(h * 1.3)), ARROW)
-        tx = tx + gap
-    end
-    -- the fletching at the back
-    if shaft_end - x > h * 3 then
-        local fw = max(1, h * 0.2)
-        for k = 0, 1 do
-            local fx = x + h * 0.1 + k * h * 0.7
-            c:polyline({ fx, mid - h * 0.8, fx + h * 0.65, mid, fx, mid + h * 0.8 }, fw, LILAC)
-        end
-    end
-    -- the head
-    local hx = min(e, x + w) - hl
-    local step = max(1, floor(hh / 12))
-    local yy = floor(mid - hh)
-    while yy < mid + hh do
-        local k = 1 - abs(yy + step / 2 - mid) / hh
-        local len = hl * k
-        if len > 0.5 then c:rect(floor(hx), yy, max(1, floor(len + 0.5)), step, SILVER) end
-        yy = yy + step
+    -- the wire read
+    wire(c, x, e, mid, h, DEEP, lw * 1.15, x)
+    bx = x + gap * 0.5
+    while bx <= e do
+        barb(c, bx, mid, h, CRIMSON, lw * 1.1)
+        bx = bx + gap
     end
 end
 
