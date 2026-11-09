@@ -84,6 +84,136 @@
         "style.lua",
         "draw.lua"
       ]
+    },
+    {
+      "id": "gothic",
+      "version": "1.0",
+      "api": 1,
+      "name": "Gothic",
+      "names": {
+        "es": "Gótico",
+        "fr": "Gothique",
+        "pt_br": "Gótico",
+        "pt": "Gótico",
+        "it": "Gotico",
+        "uk": "Готика"
+      },
+      "description": "A rose that fills in with your pages inside a thorny vine that grows with your minutes for the rings, roses that gain a ring of thorns on days you meet both goals, crimson arrows for the bars, a vial in an arch for the year goal, pointed arches for the charts and a spider spinning its web for the challenge.",
+      "descriptions": {
+        "es": "Una rosa que se llena con tus páginas dentro de una enredadera de espinas que crece con tus minutos para los anillos, rosas que ganan un anillo de espinas los días que cumples ambas metas, flechas carmesí para las barras, un vial bajo un arco para la meta del año y una araña que teje su tela para el reto.",
+        "fr": "Une rose qui se remplit avec tes pages dans une ronce qui pousse avec tes minutes pour les anneaux, des roses qui gagnent une couronne d’épines les jours où tu atteins les deux objectifs, des flèches cramoisies pour les barres, une fiole sous une arche pour l’objectif de l’année et une araignée qui tisse sa toile pour le défi.",
+        "pt_br": "Uma rosa que se enche com suas páginas dentro de um ramo de espinhos que cresce com seus minutos para os anéis, rosas que ganham um anel de espinhos nos dias em que você cumpre as duas metas, flechas carmesim para as barras, um frasco num arco para a meta do ano e uma aranha tecendo sua teia para o desafio.",
+        "it": "Una rosa che si riempie con le tue pagine dentro un rovo di spine che cresce con i tuoi minuti per gli anelli, rose che ottengono un anello di spine nei giorni in cui raggiungi entrambi gli obiettivi, frecce cremisi per le barre, una fiala sotto un arco per l’obiettivo dell’anno e un ragno che tesse la tela per la sfida."
+      },
+      "author": "Steven",
+      "files": [
+        "style.lua",
+        "draw.lua"
+      ]
+    },
+    {
+      "id": "forest",
+      "version": "1.0",
+      "api": 1,
+      "name": "Forest",
+      "names": {
+        "es": "Bosque",
+        "fr": "Forêt",
+        "pt_br": "Floresta",
+        "pt": "Floresta",
+        "it": "Bosco",
+        "uk": "Ліс"
+      },
+      "description": "A pine tree whose tiers fill for the rings, small pines for the days, a snail on a mossy branch for the bars, a woodpile that gains a log per book for the year goal, trees for the charts, wooden signs for the trends and an acorn that grows into an oak for the challenge.",
+      "descriptions": {
+        "es": "Un pino cuyos pisos se llenan para los anillos, pinos pequeños para los días, un caracol sobre una rama para las barras, una pila de leña con un tronco por libro para la meta del año y una bellota que se convierte en roble para el reto.",
+        "fr": "Un sapin dont les étages se remplissent pour les anneaux, de petits sapins pour les jours, un escargot sur une branche pour les barres, une pile de bûches qui gagne une bûche par livre pour l’objectif de l’année et un gland qui devient chêne pour le défi.",
+        "pt_br": "Um pinheiro cujos andares se enchem para os anéis, pinheirinhos para os dias, um caracol num galho para as barras, uma pilha de lenha com um tronco por livro para a meta do ano e uma bolota que vira carvalho para o desafio.",
+        "it": "Un pino i cui piani si riempiono per gli anelli, piccoli pini per i giorni, una lumaca su un ramo per le barre, una catasta di legna con un ceppo per libro per l’obiettivo dell’anno e una ghianda che diventa quercia per la sfida."
+      },
+      "author": "Steven",
+      "files": [
+        "style.lua",
+        "draw.lua"
+      ]
+    },
+    {
+      "id": "ocean",
+      "version": "1.0",
+      "api": 1,
+      "name": "Ocean",
+      "names": {
+        "es": "Océano",
+        "fr": "Océan",
+        "pt_br": "Oceano",
+        "pt": "Oceano",
+        "it": "Oceano",
+        "uk": "Океан"
+      },
+      "description": "A lighthouse that fills up and shines once your pages and minutes are done for the rings, small lighthouses for the days, a fish swimming along the bars, a treasure chest of pearls for the year goal, portholes for the calendar and a sailboat crossing to an island for the challenge.",
+      "descriptions": {
+        "es": "Un faro que se llena y se enciende al cumplir páginas y minutos para los anillos, faros pequeños para los días, un pez que nada por las barras, un cofre de perlas para la meta del año y un velero que cruza hasta una isla para el reto.",
+        "fr": "Un phare qui se remplit et s’allume une fois tes pages et tes minutes faites pour les anneaux, de petits phares pour les jours, un poisson qui nage le long des barres, un coffre de perles pour l’objectif de l’année et un voilier qui rejoint une île pour le défi.",
+        "pt_br": "Um farol que se enche e acende quando as páginas e os minutos são cumpridos para os anéis, farolzinhos para os dias, um peixe nadando pelas barras, um baú de pérolas para a meta do ano e um veleiro que cruza até uma ilha para o desafio.",
+        "it": "Un faro che si riempie e si accende quando pagine e minuti sono fatti per gli anelli, piccoli fari per i giorni, un pesce che nuota lungo le barre, uno scrigno di perle per l’obiettivo dell’anno e una barca a vela che raggiunge un’isola per la sfida."
+      },
+      "author": "Steven",
+      "files": [
+        "style.lua",
+        "draw.lua"
+      ]
+    },
+    {
+      "id": "space",
+      "version": "1.0",
+      "api": 1,
+      "name": "Space",
+      "names": {
+        "es": "Espacio",
+        "fr": "Espace",
+        "pt_br": "Espaço",
+        "pt": "Espaço",
+        "it": "Spazio",
+        "uk": "Космос"
+      },
+      "description": "The moon waxing in the middle with a comet flying round it for the rings, the moon waxing to full for the days, a rocket along the bars, a constellation that gains a star per book for the year goal, little planets for the calendar and a spiral galaxy whose stars light up for the challenge.",
+      "descriptions": {
+        "es": "La luna creciendo en el centro con un cometa girando a su alrededor para los anillos, la luna que crece hasta llena para los días, un cohete por las barras, una constelación con una estrella por libro para la meta del año y una galaxia espiral cuyas estrellas se encienden para el reto.",
+        "fr": "La lune qui croît au centre avec une comète qui tourne autour pour les anneaux, la lune qui croît jusqu’à la pleine lune pour les jours, une fusée le long des barres, une constellation qui gagne une étoile par livre pour l’objectif de l’année et une galaxie spirale dont les étoiles s’allument pour le défi.",
+        "pt_br": "A lua crescendo no centro com um cometa girando ao redor para os anéis, a lua crescendo até cheia para os dias, um foguete pelas barras, uma constelação que ganha uma estrela por livro para a meta do ano e uma galáxia espiral cujas estrelas se acendem para o desafio.",
+        "it": "La luna che cresce al centro con una cometa che le gira intorno per gli anelli, la luna che cresce fino a piena per i giorni, un razzo lungo le barre, una costellazione che guadagna una stella per libro per l’obiettivo dell’anno e una galassia a spirale le cui stelle si accendono per la sfida."
+      },
+      "author": "Steven",
+      "files": [
+        "style.lua",
+        "draw.lua"
+      ]
+    },
+    {
+      "id": "honey",
+      "version": "1.0",
+      "api": 1,
+      "name": "Honey",
+      "names": {
+        "es": "Miel",
+        "fr": "Miel",
+        "pt_br": "Mel",
+        "pt": "Mel",
+        "it": "Miele",
+        "uk": "Мед"
+      },
+      "description": "A beehive that fills with honey for the rings, little hives for the days, a honeycomb for the year goal, a bee flying along the bars, honeycomb cells for the calendar and the trends, and a honey jar for the challenge.",
+      "descriptions": {
+        "es": "Una colmena que se llena de miel para los anillos, colmenitas para los días, un panal para la meta del año, una abeja volando por las barras, celdas de panal para el calendario y las tendencias, y un tarro de miel para el reto.",
+        "fr": "Une ruche qui se remplit de miel pour les anneaux, de petites ruches pour les jours, un rayon de miel pour l’objectif de l’année, une abeille le long des barres, des alvéoles pour le calendrier et les tendances, et un pot de miel pour le défi.",
+        "pt_br": "Uma colmeia que se enche de mel para os anéis, colmeias pequenas para os dias, um favo para a meta do ano, uma abelha voando pelas barras, alvéolos de favo para o calendário e as tendências, e um pote de mel para o desafio.",
+        "it": "Un alveare che si riempie di miele per gli anelli, piccoli alveari per i giorni, un favo per l’obiettivo dell’anno, un’ape che vola lungo le barre, celle di favo per il calendario e le tendenze, e un vasetto di miele per la sfida."
+      },
+      "author": "Steven",
+      "files": [
+        "style.lua",
+        "draw.lua"
+      ]
     }
   ]
 }
