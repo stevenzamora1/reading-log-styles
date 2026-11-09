@@ -4,15 +4,15 @@
 return {
     api = 1,
     id = "christmas",
-    version = "1.0",
+    version = "1.1",
     name = "Christmas",
     names = { es = "Navidad", fr = "Noël", pt_br = "Natal", pt = "Natal", it = "Natale" },
-    description = "A wreath and candy cane for the rings, baubles for the days, a tree for the year goal, presents for the bars, lights for the lines, an advent calendar and a snowflake for the challenge.",
+    description = "A wreath and candy cane for the rings, baubles for the days, a tree for the year goal, presents for the bars, lights for the lines, an advent calendar and a present that opens to a book for the challenge.",
     descriptions = {
-        es = "Una corona para los anillos, bastones de caramelo para las barras y un copo de nieve para el reto, sobre una página verde oscuro.",
-        fr = "Une couronne pour les anneaux, des sucres d’orge pour les barres et un flocon pour le défi, sur une page vert sapin.",
-        pt_br = "Uma guirlanda para os anéis, bengalas de doce para as barras e um floco de neve para o desafio, sobre uma página verde-escura.",
-        it = "Una ghirlanda per gli anelli, bastoncini di zucchero per le barre e un fiocco di neve per la sfida, su una pagina verde scuro.",
+        es = "Una corona para los anillos, bastones de caramelo para las barras y un regalo que se abre en un libro para el reto, sobre una página verde oscuro.",
+        fr = "Une couronne pour les anneaux, des sucres d’orge pour les barres et un cadeau qui s’ouvre sur un livre pour le défi, sur une page vert sapin.",
+        pt_br = "Uma guirlanda para os anéis, bengalas de doce para as barras e um presente que se abre num livro para o desafio, sobre uma página verde-escura.",
+        it = "Una ghirlanda per gli anelli, bastoncini di zucchero per le barre e un regalo che si apre su un libro per la sfida, su una pagina verde scuro.",
     },
     author = "Steven",
     theme = {

@@ -1,6 +1,6 @@
 -- Christmas drawings for Reading Log (the format: Reading Log's stylepacks.lua,
 -- or this repository's README).
-local floor, max, min, sqrt, sin, cos, pi = math.floor, math.max, math.min, math.sqrt, math.sin, math.cos, math.pi
+local floor, max, min, sqrt, sin, cos, pi, abs = math.floor, math.max, math.min, math.sqrt, math.sin, math.cos, math.pi, math.abs
 
 local GREEN, PINE, DARK = { 31, 122, 63 }, { 46, 140, 74 }, { 20, 90, 44 }
 local RED, DEEPRED, WHITE = { 200, 16, 46 }, { 165, 13, 38 }, { 255, 255, 255 }
@@ -341,7 +341,36 @@ function D.calendarEmpty(c, x, y, w, h, n, tone, o)
     return true
 end
 
+-- A string of coloured bulbs draped along the top edge of a cover.
+local function lights(c, x, y, w, h)
+    local sag = max(2, h * 0.05)
+    local n = 12
+    local pts = {}
+    for i = 0, n do
+        local t = i / n
+        pts[#pts + 1] = x - w * 0.04 + w * 1.08 * t
+        pts[#pts + 1] = y + sag * abs(sin(t * pi * 2))
+    end
+    c:polyline(pts, max(1, w * 0.012), DARK)
+    local bulbs = max(4, floor(w / max(8, h * 0.07)))
+    local br = max(1.5, min(w / bulbs * 0.26, h * 0.035))
+    for i = 0, bulbs - 1 do
+        local t = (i + 0.5) / bulbs
+        local bx = x - w * 0.04 + w * 1.08 * t
+        local by = y + sag * abs(sin(t * pi * 2))
+        c:rect(floor(bx - br * 0.45), floor(by), max(1, floor(br * 0.9)), max(1, floor(br * 0.6)), GOLDDARK)
+        c:disc(bx, by + br * 1.5, br, BAUBLES[(i % #BAUBLES) + 1])
+        c:disc(bx - br * 0.3, by + br * 1.2, max(0.6, br * 0.28), mix(WHITE, BAUBLES[(i % #BAUBLES) + 1], 0.3))
+    end
+end
+
+function D.bookCover(c, x, y, w, h, tone, o)
+    lights(c, x, y, w, h)
+    return true
+end
+
 function D.calendarCover(c, x, y, w, h, tone, o)
+    lights(c, x, y, w, h)
     -- the door, swung open on the left
     local fw = max(3, floor(w * 0.16))
     c:rrect(x - fw - 1, y + floor(h * 0.04), fw, floor(h * 0.92), max(1, floor(fw * 0.2)), RED)
@@ -352,35 +381,71 @@ function D.calendarCover(c, x, y, w, h, tone, o)
     return true
 end
 
--- ─── the challenge: a snowflake that grows its arms ──────────────────────────
+-- ─── the challenge: a present that opens to a book ──────────────────────────
 
-local function arms(c, cx, cy, R, frac, col, lw)
-    for i = 0, 5 do
-        local a = -pi / 2 + pi * i / 3
-        local L = R * frac
-        if L > 0 then
-            local ex, ey = at(cx, cy, L, a)
-            c:polyline({ cx, cy, ex, ey }, lw, col)
-        end
-        for _, f in ipairs({ 0.45, 0.75 }) do
-            if f * R <= L then
-                local bx, by = at(cx, cy, f * R, a)
-                for side = -1, 1, 2 do
-                    local b = a + side * 0.7
-                    c:polyline({ bx, by, bx + R * 0.24 * cos(b), by + R * 0.24 * sin(b) }, lw * 0.8, col)
-                end
-            end
-        end
-    end
-end
-
+-- The present: it fills with red as the month's goal fills; near the end
+-- the lid lifts and a book rises out, and at the goal the book lies open
+-- above the box, saying Merry Christmas.
 function D.challenge(c, cx, cy, R, frac, tone)
-    local lw = max(2, R * 0.075)
-    arms(c, cx, cy, R * 0.92, 1, tone.track, lw)
-    arms(c, cx, cy, R * 0.92, max(0, min(1, frac)), ICE, lw)
-    c:disc(cx, cy, R * 0.2, tone.bg)
-    c:ring(cx, cy, R * 0.2, max(2, R * 0.05), 1, ICE, ICE)
-    if frac >= 1 then c:disc(cx, cy, R * 0.09, GOLD) end
+    frac = max(0, min(1, frac or 0))
+    local f1 = min(1, frac / 0.7)
+    local f2 = max(0, min(1, (frac - 0.7) / 0.3))
+    local bw, bh = R * 1.3, R * 0.78
+    local bx, bottom = cx - bw / 2, cy + R * 0.92
+    local top = bottom - bh
+    local rib = max(2, bw * 0.13)
+    -- the book, rising (drawn first: the box hides its lower part)
+    if f2 > 0 and frac < 1 then
+        local kw, kh = bw * 0.5, bh * 0.95
+        local ky = top - kh * f2 * 0.8
+        c:rect(floor(cx - kw / 2), floor(ky), floor(kw), floor(kh), GREEN)
+        c:rect(floor(cx - kw / 2), floor(ky), max(2, floor(kw * 0.12)), floor(kh), DARK)
+        c:rect(floor(cx - kw * 0.2), floor(ky + kh * 0.15), floor(kw * 0.55), max(1, floor(kh * 0.05)), GOLD)
+    end
+    -- the box
+    c:rect(floor(bx), floor(top), floor(bw), floor(bh), mix(tone.track, tone.bg, 0.3))
+    if f1 > 0 then
+        local fh = floor(bh * f1)
+        c:rect(floor(bx), floor(bottom - fh), floor(bw), fh, RED)
+    end
+    c:rect(floor(cx - rib / 2), floor(top), floor(rib), floor(bh), GOLD)
+    -- the lid: on the box, lifting off to the right
+    local lw, lh = bw * 1.1, bh * 0.24
+    local lx = cx - lw / 2 + f2 * R * 0.62
+    local ly = top - lh - f2 * R * 0.55
+    if frac < 1 then
+        c:rect(floor(lx), floor(ly), floor(lw), floor(lh), f1 >= 1 and DEEPRED or mix(tone.track, tone.fg, 0.15))
+        c:rect(floor(lx + lw / 2 - rib / 2), floor(ly), floor(rib), floor(lh), GOLD)
+        bow(c, lx + lw / 2, ly, max(3, R * 0.13), f1 >= 1 and RED or GOLD)
+    end
+    -- the goal met: the open book, the words, and a few stars
+    if frac >= 1 then
+        local pw, ph = R * 0.82, R * 0.62
+        local py = top - ph * 0.78
+        c:rect(floor(cx - pw - 2), floor(py + ph * 0.06), floor(pw * 2 + 4), floor(ph), DARK)
+        c:rect(floor(cx - pw), floor(py), floor(pw), floor(ph), CREAM)
+        c:rect(floor(cx), floor(py), floor(pw), floor(ph), CREAM)
+        c:rect(floor(cx - 1), floor(py), 2, floor(ph), mix(CREAM, BROWN, 0.5))
+        -- lines on the pages, and the bow left on the box
+        for k = 1, 3 do
+            local ly2 = floor(py + ph * (0.62 + 0.1 * k))
+            c:rect(floor(cx - pw * 0.85), ly2, floor(pw * 0.7), 1, mix(CREAM, BROWN, 0.3))
+            c:rect(floor(cx + pw * 0.15), ly2, floor(pw * 0.7), 1, mix(CREAM, BROWN, 0.3))
+        end
+        bow(c, cx, top + bh * 0.3, max(3, R * 0.12), GOLD)
+        local fs = max(8, floor(R * 0.17))
+        if c.text then
+            while fs > 6 and c:text("Christmas", fs, { bold = true }).w > pw * 0.86 do fs = fs - 1 end
+        end
+        if c.label then
+            c:label("Merry", fs, cx - pw / 2, py + ph * 0.36, { bold = true, color = RED, anchor = "c", valign = "mid", max_w = pw * 0.9 })
+            c:label("Christmas", fs, cx + pw / 2, py + ph * 0.36, { bold = true, color = GREEN, anchor = "c", valign = "mid", max_w = pw * 0.9 })
+        end
+        star(c, cx - pw * 1.05, py - R * 0.08, max(3, R * 0.08), GOLD)
+        star(c, cx + pw * 1.08, py + R * 0.06, max(3, R * 0.06), GOLD)
+        star(c, cx + pw * 0.2, py - R * 0.2, max(3, R * 0.07), GOLD)
+    end
+    return true
 end
 
 -- ─── progress bars: a candy cane with a bell ─────────────────────────────────

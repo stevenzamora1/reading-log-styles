@@ -555,7 +555,32 @@ function D.calendarEmpty(c, x, y, w, h, n, tone, o)
     return true
 end
 
+-- ─── blood dripping from the top of a cover ─────────────────────────────────
+
+local DRIPS = { { 0.07, 0.2, 0.05 }, { 0.19, 0.11, 0.04 }, { 0.33, 0.3, 0.055 }, { 0.48, 0.15, 0.04 },
+                { 0.62, 0.25, 0.05 }, { 0.77, 0.09, 0.035 }, { 0.9, 0.36, 0.06 } }
+
+local function blood(c, x, y, w, h)
+    local band = max(2, h * 0.035)
+    c:rect(floor(x), floor(y), floor(w), floor(band), DEEP)
+    -- a wavy edge under the band
+    local r = band * 0.8
+    local n = max(3, floor(w / (r * 1.7)))
+    for i = 0, n do c:disc(x + w * i / n, y + band, r * (0.7 + 0.3 * ((i * 7) % 3) / 2), DEEP) end
+    for _, d in ipairs(DRIPS) do
+        local dw = max(2, w * d[3])
+        local dx = x + w * d[1]
+        local len = max(band * 2, h * d[2])
+        c:rect(floor(dx - dw / 2), floor(y), max(2, floor(dw)), floor(len), DEEP)
+        c:disc(dx, y + len, dw * 0.85, DEEP)
+        -- a little shine down the drip and on the drop
+        c:rect(floor(dx - dw * 0.3), floor(y + band), max(1, floor(dw * 0.22)), floor(len * 0.75), CRIMSON)
+        c:disc(dx - dw * 0.3, y + len - dw * 0.15, max(1, dw * 0.22), mix(CRIMSON, WHITE, 0.45))
+    end
+end
+
 function D.calendarCover(c, x, y, w, h, tone, o)
+    blood(c, x, y, w, h)
     local r = max(3, min(w, h) * 0.12)
     local sx, sy = x + w - r * 0.95, y + h - r * 0.95
     c:disc(sx, sy, r * 1.1, WINE)
@@ -690,6 +715,11 @@ function D.bar(c, x, y, w, h, frac, tone, fill)
         if len > 0.5 then c:rect(floor(hx), yy, max(1, floor(len + 0.5)), step, SILVER) end
         yy = yy + step
     end
+end
+
+function D.bookCover(c, x, y, w, h, tone, o)
+    blood(c, x, y, w, h)
+    return true
 end
 
 return D

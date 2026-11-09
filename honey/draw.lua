@@ -328,4 +328,35 @@ function D.calendarCover(c, x, y, w, h, tone, o)
     return true
 end
 
+-- ─── honeycomb and bees on a cover ──────────────────────────────────────────
+
+local COMB = { { 0, 0, HONEY }, { 1, 0, HONEY_L }, { 2, 0, WAX }, { 0.5, 1, HONEY }, { 1.5, 1, HONEY }, { 0, 2, HONEY_L } }
+
+function D.bookCover(c, x, y, w, h, tone, o)
+    local r = max(5, w * 0.1)
+    local cw = r * 1.732
+    local ox, oy = x + r * 0.5, y + r * 0.6
+    for _, cell in ipairs(COMB) do
+        local cx, cy = ox + cell[1] * cw, oy + cell[2] * r * 1.5
+        hex(c, cx, cy, r, HONEY_D)
+        hex(c, cx, cy, r * 0.8, cell[3])
+    end
+    -- honey running down from the lowest cell
+    local dx = ox + 0.5 * cw
+    local dy = oy + r * 1.5 + r * 0.7
+    c:rect(floor(dx - r * 0.12), floor(dy), max(2, floor(r * 0.24)), floor(r * 1.1), HONEY)
+    c:disc(dx, dy + r * 1.1, r * 0.2, HONEY)
+    -- two bees and their path
+    local s = max(8, w * 0.22)
+    local bx1, by1 = x + w * 0.86, y + h * 0.28
+    local bx2, by2 = x + w * 0.98, y + h * 0.5
+    for k = 1, 5 do
+        local t = k / 6
+        c:disc(bx1 - s * 0.6 - t * w * 0.25, by1 + s * 0.4 + sin(t * pi * 2) * s * 0.25, max(1, s * 0.04), BLACK)
+    end
+    bee(c, bx1, by1, s)
+    bee(c, bx2, by2, s * 0.8)
+    return true
+end
+
 return D

@@ -271,7 +271,6 @@ function D.ring(c, cx, cy, R, t, frac, track, fill, tone, which)
     local i = which == 2 and 2 or 3
     tierFill(c, cx, cy, tri.R, i, frac, PINE[i])
     if i == 3 then
-        if frac >= 1 then starAt(c, cx, cy - 0.98 * tri.R, max(3, tri.R * 0.13), STAR) end
         tri = nil
     end
     return true
@@ -535,8 +534,7 @@ end
 
 -- ─── the challenge: an acorn grows into an oak ───────────────────────────────
 -- An acorn, a sprout, a sapling, then a young oak that fills out until the
--- month's goal is met, when acorns hang from it. The four stages along the
--- bottom, the one it's at underlined.
+-- month's goal is met, when acorns hang from it.
 
 local function oak(c, cx, ground, R, g, tone)
     if g < 0.12 then
@@ -586,7 +584,7 @@ end
 
 function D.challenge(c, cx, cy, R, frac, tone)
     frac = max(0, min(1, frac or 0))
-    local ground = cy + R * 0.5
+    local ground = cy + R * 0.82
     -- the mound
     local mw, mh = R * 0.95, R * 0.14
     fillRows(c, cx, ground - mh, ground + mh * 0.6, function(yy)
@@ -594,16 +592,6 @@ function D.challenge(c, cx, cy, R, frac, tone)
         return mw * sqrt(max(0, 1 - (1 - k) * (1 - k))) * (k <= 1 and 1 or 0)
     end, MOSS_LIGHT)
     oak(c, cx, ground, R, frac, tone)
-    -- the stages
-    local s = R * 0.22
-    local sy = cy + R * 0.98
-    local stage = (frac < 0.12 and 1) or (frac < 0.32 and 2) or (frac < 1 and 3) or 4
-    local gs = { 0.05, 0.22, 0.5, 1 }
-    for i = 1, 4 do
-        local sx = cx + (i - 2.5) * s * 1.6
-        oak(c, sx, sy, s * 1.1, gs[i], tone)
-        if i == stage then c:rrect(floor(sx - s * 0.5), floor(sy + s * 0.12), floor(s), max(2, floor(s * 0.1)), s * 0.05, OAK) end
-    end
 end
 
 -- ─── progress bars: a snail on a mossy branch ────────────────────────────────
@@ -639,6 +627,47 @@ function D.bar(c, x, y, w, h, frac, tone, fill)
     c:disc(scx, scy, r, OAK)
     c:ring(scx + r * 0.1, scy + r * 0.05, r * 0.62, max(1, r * 0.14), 1, OAK_LINE, OAK_LINE)
     c:disc(scx + r * 0.18, scy + r * 0.1, max(1, r * 0.2), OAK_LINE)
+end
+
+-- ─── vines hanging over a cover ─────────────────────────────────────────────
+
+local STRANDS = { { 0.08, 0.42 }, { 0.3, 0.2 }, { 0.55, 0.3 }, { 0.8, 0.14 }, { 0.93, 0.5 } }
+
+function D.bookCover(c, x, y, w, h, tone, o)
+    local lw = max(1.5, w * 0.022)
+    local ll, lwid = max(5, w * 0.11), max(3, w * 0.055)
+    -- a runner along the top edge
+    local pts = {}
+    for i = 0, 12 do
+        local t = i / 12
+        pts[#pts + 1] = x - w * 0.03 + w * 1.06 * t
+        pts[#pts + 1] = y + h * 0.012 * sin(t * pi * 5)
+    end
+    c:polyline(pts, lw * 1.2, BARK)
+    for k, st in ipairs(STRANDS) do
+        local sx, len = x + w * st[1], h * st[2]
+        local sp = {}
+        local n = 10
+        for i = 0, n do
+            local t = i / n
+            sp[#sp + 1] = sx + w * 0.025 * sin(t * pi * 2 + k)
+            sp[#sp + 1] = y + len * t
+        end
+        c:polyline(sp, lw, MOSS_DARK)
+        -- leaves, left and right in turn
+        local j = 0
+        local yy = ll * 0.6
+        while yy < len - ll * 0.2 do
+            local t = yy / len
+            local lx = sx + w * 0.025 * sin(t * pi * 2 + k)
+            local side = (j % 2 == 0) and 1 or -1
+            leaf(c, lx, y + yy, pi / 2 - side * 1.0, ll, lwid, (j % 3 == 0) and MOSS_LIGHT or MOSS)
+            j = j + 1
+            yy = yy + ll * 0.75
+        end
+        leaf(c, sx + w * 0.025 * sin(pi * 2 + k), y + len, pi / 2, ll * 0.9, lwid, MOSS)
+    end
+    return true
 end
 
 return D

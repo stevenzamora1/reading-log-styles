@@ -5,7 +5,7 @@
 return {
     api = 1,
     id = "ocean",
-    version = "1.0",
+    version = "1.1",
     name = "Ocean",
     names = { es = "Océano", fr = "Océan", pt_br = "Oceano", pt = "Oceano", it = "Oceano", uk = "Океан" },
     description = "A lighthouse that fills up and shines once your pages and minutes are done for the rings, small lighthouses for the days, a fish swimming along the bars, a treasure chest of pearls for the year goal, portholes for the calendar and a sailboat crossing to an island for the challenge.",

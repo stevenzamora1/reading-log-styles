@@ -203,53 +203,45 @@ function D.day(c, cx, cy, d, fp, fm, tone, o)
     return true
 end
 
--- ─── the year goal: a constellation, a star per book ─────────────────────────
--- A place for every book (as many as fit; past 30 each stands for several),
--- winding down the box; read ones are lit gold and linked.
+-- ─── the year goal: a star cluster ──────────────────────────────────────────
+-- A star for every book of the goal, packed in a round cluster (a sunflower
+-- spiral, so it stays neat at 10 or 200). Read books light up from the bright
+-- middle outward; the rest are faint. Past 300 each star stands for several.
+
+local CLUSTER = { VIOLET, CYAN, PINK, VIOLET_L, GOLD, CYAN_L }
 
 function D.goal(c, x, y, w, h, done, target, tone)
-    local n = (target and target > 0) and min(target, 30) or 12
+    local n = (target and target > 0) and min(target, 300) or 24
     local per = (target and target > 0) and target / n or 1
-    local lit = (target and target > 0) and floor(min(done, target) / per + 1e-6) or 0
-    local seed = 11
-    local function rnd()
-        seed = (seed * 1103515245 + 12345) % 2147483648
-        return (seed % 10000) / 10000
-    end
-    local pts = {}
-    -- a winding path down the box, like a constellation's line
-    for i = 1, n do
-        local f = (i - 0.5) / n
-        local px = x + w * (0.5 + 0.3 * sin(f * pi * 2.6 + 0.6) + (rnd() - 0.5) * 0.12)
-        local py = y + h * (0.06 + 0.88 * f) + (rnd() - 0.5) * h * 0.3 / n
-        pts[i] = { px, py }
-    end
-    local r = max(3, min(w * 0.08, h / n * 0.45))
-    local dim = mix(tone.track, tone.fg, 0.1)
-    -- the links: lit between read stars, faint dashes ahead
-    for i = 1, n - 1 do
-        local a, b = pts[i], pts[i + 1]
+    local lit = (target and target > 0) and floor(min(done or 0, target) / per + 1e-6) or 0
+    local cx, cy = x + w / 2, y + h / 2
+    local rx, ry = w * 0.46, h * 0.44
+    local d = 0.9 * sqrt(rx * ry / n)
+    local r = max(1.2, min(d * 0.48, min(w, h) * 0.07))
+    local dim = mix(tone.track, tone.fg, 0.12)
+    local core = max(2, min(rx, ry) * 0.12)
+    glow(c, cx, cy, core * 1.3, VIOLET, tone.bg)
+    for i = 0, n - 1 do
+        local f = sqrt((i + 0.5) / n)
+        local a = i * 2.39996
+        local px = cx + rx * f * cos(a)
+        local py = cy + ry * f * sin(a)
         if i < lit then
-            c:polyline({ a[1], a[2], b[1], b[2] }, max(1.5, r * 0.28), VIOLET_L)
-        else
-            for k = 0, 4 do
-                local f0, f1 = (k + 0.2) / 5, (k + 0.6) / 5
-                c:polyline({ a[1] + (b[1] - a[1]) * f0, a[2] + (b[2] - a[2]) * f0, a[1] + (b[1] - a[1]) * f1, a[2] + (b[2] - a[2]) * f1 },
-                    max(1, r * 0.15), dim)
+            local col = CLUSTER[(i % #CLUSTER) + 1]
+            if r >= 5 then
+                star(c, px, py, r * 1.05, col)
+            else
+                c:disc(px, py, r * 1.25, mix(col, tone.bg, 0.55))
+                c:disc(px, py, r * 0.9, col)
             end
-        end
-    end
-    for i = 1, n do
-        local p = pts[i]
-        if i <= lit then
-            glow(c, p[1], p[2], r * 0.8, GOLD, tone.bg)
-            star(c, p[1], p[2], r, GOLD)
         else
-            c:disc(p[1], p[2], max(1.5, r * 0.3), dim)
+            c:disc(px, py, max(1, r * 0.45), dim)
         end
     end
-    if target and target > 0 and done >= target then
-        twinkle(c, x + w * 0.85, y + h * 0.05, max(4, r), WHITE)
+    c:disc(cx, cy, core * 0.7, mix(GOLD, WHITE, 0.3))
+    if target and target > 0 and (done or 0) >= target then
+        twinkle(c, cx + rx * 0.9, cy - ry * 0.85, max(4, r * 2), WHITE)
+        twinkle(c, cx - rx * 0.88, cy + ry * 0.8, max(3, r * 1.5), GOLD)
     end
     return true
 end
@@ -412,10 +404,40 @@ function D.calendarEmpty(c, x, y, w, h, n, tone, o)
     return true
 end
 
+-- Stars spilling over the top edge of a cover and a comet across its lower
+-- corner.
+local EDGE = { { -0.04, 0.02, 0.11, GOLD }, { 0.24, -0.05, 0.06, WHITE }, { 0.55, 0.03, 0.08, CYAN },
+               { 0.86, -0.02, 0.07, PINK }, { 1.04, 0.2, 0.05, WHITE }, { -0.06, 0.32, 0.045, VIOLET_L } }
+
+local function starryEdge(c, x, y, w, h, tone)
+    local u = min(w, h * 0.7)
+    for _, e in ipairs(EDGE) do
+        local sx, sy, r = x + w * e[1], y + h * e[2], max(2.5, u * e[3])
+        c:disc(sx, sy, r * 0.75, tone.bg)
+        twinkle(c, sx, sy, r, e[4])
+    end
+    -- the comet: a tail from the right edge down to its head
+    local hx, hy = x + w * 0.72, y + h * 0.9
+    local tx, ty = x + w * 1.06, y + h * 0.68
+    local hr = max(2, u * 0.06)
+    local n = 18
+    for k = n - 1, 0, -1 do
+        local f0, f1 = k / n, (k + 1) / n
+        c:polyline({ hx + (tx - hx) * f0, hy + (ty - hy) * f0, hx + (tx - hx) * f1, hy + (ty - hy) * f1 },
+            max(1, hr * 1.7 * (1 - f0)), mix(k < 2 and CYAN_L or VIOLET_L, tone.bg, 0.15 + 0.7 * f0))
+    end
+    c:disc(hx, hy, hr * 1.35, CYAN_L)
+    c:disc(hx, hy, hr, WHITE)
+end
+
+function D.bookCover(c, x, y, w, h, tone, o)
+    starryEdge(c, x, y, w, h, tone)
+    return true
+end
+
 function D.calendarCover(c, x, y, w, h, tone, o)
     local s = max(4, min(w, h) * 0.13)
-    c:disc(x + w - s * 0.6, y + h - s * 0.6, s * 1.15, tone.bg)
-    star(c, x + w - s * 0.6, y + h - s * 0.6, s, GOLD)
+    starryEdge(c, x, y, w, h, tone)
     if o.today then crescent(c, x + w * 0.5, y - s * 0.6, max(4, s * 0.9), tone.bg) end
     return true
 end

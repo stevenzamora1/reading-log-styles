@@ -26,18 +26,22 @@ space/
 honey/
   style.lua
   draw.lua
+winter/
+  style.lua
+  draw.lua
 ```
 
 ## Styles here
 
 | Style | What it draws |
 | --- | --- |
-| **Christmas** | A wreath and a candy cane for the rings, baubles for the days, a tree for the year goal, presents for the bar charts, lights for the lines, an advent calendar, a snowflake for the challenge. |
-| **Gothic** | A big rose for the rings whose petals fill in with your pages, inside a thorny vine with a curled tendril that grows round it with your minutes; roses for the days that gain a ring of thorns once both goals are met, crimson arrows for the progress bars, a marked vial in a pointed arch for the year goal, lancet windows for the bar charts and the calendar, crosses and diamonds for the lines, candles on Today's timeline, a spider spinning its web for the challenge. |
-| **Forest** | A pine tree for the rings, its bottom, middle and top tiers filling with pages, minutes and the streak; small pines for the days (their trunks turn oak once the day's minutes are read), a snail on a mossy branch for the progress bars, a woodpile that gains a log per book for the year goal, trees for the bar charts, a leafy vine and acorns for the lines, mushrooms on Today's timeline, wooden signs for Reading trends, wood slices for the calendar, an acorn that grows into an oak for the challenge. |
-| **Ocean** | A lighthouse for the rings (base, tower and lamp room fill with pages, minutes and the streak; the lamp shines once pages and minutes are done), small lighthouses for the days, a fish swimming along the progress bars, a treasure chest of pearls for the year goal, columns of sea for the bar charts, shells and bubbles for the lines, fish on Today's timeline, portholes for the calendar, a sailboat crossing to an island for the challenge. |
-| **Space** | The moon waxing in the middle (pages) with a comet flying round it (minutes) for the rings, the moon waxing for the days, a rocket along the progress bars, a constellation that gains a star per book for the year goal, columns of light for the bar charts, stars and little planets for the lines, twinkles on Today's timeline, ringed planets for Reading trends and the calendar, a spiral galaxy whose stars light up for the challenge. |
-| **Honey** | A straw beehive for the rings (its three bands fill with pages, minutes and the streak; a bee comes out once the streak is full), little hives for the days, a honeycomb whose cells fill per book for the year goal, a bee along a honey drip for the progress bars, honeycomb cells for the calendar and Reading trends, and a honey jar filling for the challenge. |
+| **Christmas** | A wreath and a candy cane for the rings, baubles for the days, a tree for the year goal, presents for the bar charts, lights for the lines, an advent calendar, a present that opens to a book for the challenge; a string of lights along the top of the covers on Continue reading and the calendar. |
+| **Gothic** | A big rose for the rings whose petals fill in with your pages, inside a thorny vine with a curled tendril that grows round it with your minutes; roses for the days that gain a ring of thorns once both goals are met, crimson arrows for the progress bars, a marked vial in a pointed arch for the year goal, lancet windows for the bar charts and the calendar, crosses and diamonds for the lines, candles on Today's timeline, a spider spinning its web for the challenge; blood dripping down the covers on Continue reading and the calendar. |
+| **Forest** | A pine tree for the rings, its bottom, middle and top tiers filling with pages, minutes and the streak; small pines for the days (their trunks turn oak once the day's minutes are read), a snail on a mossy branch for the progress bars, a woodpile that gains a log per book for the year goal, trees for the bar charts, a leafy vine and acorns for the lines, mushrooms on Today's timeline, wooden signs for Reading trends, wood slices for the calendar, an acorn that grows into an oak for the challenge; vines hanging over the cover on Continue reading. |
+| **Ocean** | A lighthouse for the rings (base, tower and lamp room fill with pages, minutes and the streak; the lamp shines once pages and minutes are done), small lighthouses for the days, a fish swimming along the progress bars, a treasure chest of pearls for the year goal, columns of sea for the bar charts, shells and bubbles for the lines, fish on Today's timeline, portholes for the calendar, a sailboat crossing to an island for the challenge; waves along the bottom of the covers on Continue reading and the calendar. |
+| **Space** | The moon waxing in the middle (pages) with a comet flying round it (minutes) for the rings, the moon waxing for the days, a rocket along the progress bars, a star cluster that lights a star per book for the year goal, columns of light for the bar charts, stars and little planets for the lines, twinkles on Today's timeline, ringed planets for Reading trends and the calendar, a spiral galaxy whose stars light up for the challenge; stars spilling over the covers on Continue reading and the calendar, with a comet across the corner. |
+| **Honey** | A straw beehive for the rings (its three bands fill with pages, minutes and the streak; a bee comes out once the streak is full), little hives for the days, a honeycomb whose cells fill per book for the year goal, a bee along a honey drip for the progress bars, honeycomb cells for the calendar and Reading trends, and a honey jar filling for the challenge; honeycomb and bees on the cover on Continue reading. |
+| **Winter** | A snowman for the rings (it packs with snow with your pages, gets its face (scarf, eyes, carrot nose) with your minutes, and its top hat fills with the streak), little snowmen for the days, an igloo that gains an ice block per book for the year goal, a penguin sliding along the progress bars, frosty panes for the calendar, snowflake tiles for Reading trends, snow and icicles on the covers on Continue reading and the calendar, and a snowflake whose arms grow out and frost in for the challenge. |
 
 On the reader, a downloaded style goes to
 `koreader/settings/readinglog/styles/<id>/`. You can also copy a style's
@@ -177,6 +181,10 @@ function D.trendBadge(c, cx, cy, r, dir, tone, fill) end
 -- and dressing a day's cover after it's drawn (o = { today }).
 function D.calendarEmpty(c, x, y, w, h, n, tone, o) end
 function D.calendarCover(c, x, y, w, h, tone, o) end
+
+-- Continue reading: dressing the book's cover after it's drawn
+-- (o = { pct }, how far through the book, 0 to 1). Reading Log 1.5.0 and up.
+function D.bookCover(c, x, y, w, h, tone, o) end
 
 return D
 ```

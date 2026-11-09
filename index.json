@@ -63,7 +63,7 @@
     },
     {
       "id": "christmas",
-      "version": "1.0",
+      "version": "1.1",
       "api": 1,
       "name": "Christmas",
       "names": {
@@ -72,12 +72,12 @@
         "pt_br": "Natal",
         "it": "Natale"
       },
-      "description": "A wreath for the rings, candy canes for the bars and a snowflake for the challenge, on a deep green page.",
+      "description": "A wreath for the rings, candy canes for the bars and a present that opens to a book for the challenge, on a deep green page.",
       "descriptions": {
-        "es": "Una corona para los anillos, bastones de caramelo para las barras y un copo de nieve para el reto, sobre una página verde oscuro.",
-        "fr": "Une couronne pour les anneaux, des sucres d’orge pour les barres et un flocon pour le défi, sur une page vert sapin.",
-        "pt_br": "Uma guirlanda para os anéis, bengalas de doce para as barras e um floco de neve para o desafio, sobre uma página verde-escura.",
-        "it": "Una ghirlanda per gli anelli, bastoncini di zucchero per le barre e un fiocco di neve per la sfida, su una pagina verde scuro."
+        "es": "Una corona para los anillos, bastones de caramelo para las barras y un regalo que se abre en un libro para el reto, sobre una página verde oscuro.",
+        "fr": "Une couronne pour les anneaux, des sucres d’orge pour les barres et un cadeau qui s’ouvre sur un livre pour le défi, sur une page vert sapin.",
+        "pt_br": "Uma guirlanda para os anéis, bengalas de doce para as barras e um presente que se abre num livro para o desafio, sobre uma página verde-escura.",
+        "it": "Una ghirlanda per gli anelli, bastoncini di zucchero per le barre e un regalo che si apre su un libro per la sfida, su una pagina verde scuro."
       },
       "author": "Steven",
       "files": [
@@ -87,7 +87,7 @@
     },
     {
       "id": "gothic",
-      "version": "1.0",
+      "version": "1.1",
       "api": 1,
       "name": "Gothic",
       "names": {
@@ -113,7 +113,7 @@
     },
     {
       "id": "forest",
-      "version": "1.0",
+      "version": "1.1",
       "api": 1,
       "name": "Forest",
       "names": {
@@ -139,7 +139,7 @@
     },
     {
       "id": "ocean",
-      "version": "1.0",
+      "version": "1.1",
       "api": 1,
       "name": "Ocean",
       "names": {
@@ -165,7 +165,7 @@
     },
     {
       "id": "space",
-      "version": "1.0",
+      "version": "1.1",
       "api": 1,
       "name": "Space",
       "names": {
@@ -176,12 +176,12 @@
         "it": "Spazio",
         "uk": "Космос"
       },
-      "description": "The moon waxing in the middle with a comet flying round it for the rings, the moon waxing to full for the days, a rocket along the bars, a constellation that gains a star per book for the year goal, little planets for the calendar and a spiral galaxy whose stars light up for the challenge.",
+      "description": "The moon waxing in the middle with a comet flying round it for the rings, the moon waxing to full for the days, a rocket along the bars, a star cluster that lights a star per book for the year goal, little planets for the calendar and a spiral galaxy whose stars light up for the challenge.",
       "descriptions": {
-        "es": "La luna creciendo en el centro con un cometa girando a su alrededor para los anillos, la luna que crece hasta llena para los días, un cohete por las barras, una constelación con una estrella por libro para la meta del año y una galaxia espiral cuyas estrellas se encienden para el reto.",
-        "fr": "La lune qui croît au centre avec une comète qui tourne autour pour les anneaux, la lune qui croît jusqu’à la pleine lune pour les jours, une fusée le long des barres, une constellation qui gagne une étoile par livre pour l’objectif de l’année et une galaxie spirale dont les étoiles s’allument pour le défi.",
-        "pt_br": "A lua crescendo no centro com um cometa girando ao redor para os anéis, a lua crescendo até cheia para os dias, um foguete pelas barras, uma constelação que ganha uma estrela por livro para a meta do ano e uma galáxia espiral cujas estrelas se acendem para o desafio.",
-        "it": "La luna che cresce al centro con una cometa che le gira intorno per gli anelli, la luna che cresce fino a piena per i giorni, un razzo lungo le barre, una costellazione che guadagna una stella per libro per l’obiettivo dell’anno e una galassia a spirale le cui stelle si accendono per la sfida."
+        "es": "La luna creciendo en el centro con un cometa girando a su alrededor para los anillos, la luna que crece hasta llena para los días, un cohete por las barras, un cúmulo de estrellas que enciende una estrella por libro para la meta del año y una galaxia espiral cuyas estrellas se encienden para el reto.",
+        "fr": "La lune qui croît au centre avec une comète qui tourne autour pour les anneaux, la lune qui croît jusqu’à la pleine lune pour les jours, une fusée le long des barres, un amas d’étoiles qui allume une étoile par livre pour l’objectif de l’année et une galaxie spirale dont les étoiles s’allument pour le défi.",
+        "pt_br": "A lua crescendo no centro com um cometa girando ao redor para os anéis, a lua crescendo até cheia para os dias, um foguete pelas barras, um aglomerado de estrelas que acende uma estrela por livro para a meta do ano e uma galáxia espiral cujas estrelas se acendem para o desafio.",
+        "it": "La luna che cresce al centro con una cometa che le gira intorno per gli anelli, la luna che cresce fino a piena per i giorni, un razzo lungo le barre, un ammasso di stelle che accende una stella per libro per l’obiettivo dell’anno e una galassia a spirale le cui stelle si accendono per la sfida."
       },
       "author": "Steven",
       "files": [
@@ -191,7 +191,7 @@
     },
     {
       "id": "honey",
-      "version": "1.0",
+      "version": "1.1",
       "api": 1,
       "name": "Honey",
       "names": {
@@ -208,6 +208,32 @@
         "fr": "Une ruche qui se remplit de miel pour les anneaux, de petites ruches pour les jours, un rayon de miel pour l’objectif de l’année, une abeille le long des barres, des alvéoles pour le calendrier et les tendances, et un pot de miel pour le défi.",
         "pt_br": "Uma colmeia que se enche de mel para os anéis, colmeias pequenas para os dias, um favo para a meta do ano, uma abelha voando pelas barras, alvéolos de favo para o calendário e as tendências, e um pote de mel para o desafio.",
         "it": "Un alveare che si riempie di miele per gli anelli, piccoli alveari per i giorni, un favo per l’obiettivo dell’anno, un’ape che vola lungo le barre, celle di favo per il calendario e le tendenze, e un vasetto di miele per la sfida."
+      },
+      "author": "Steven",
+      "files": [
+        "style.lua",
+        "draw.lua"
+      ]
+    },
+    {
+      "id": "winter",
+      "version": "1.0",
+      "api": 1,
+      "name": "Winter",
+      "names": {
+        "es": "Invierno",
+        "fr": "Hiver",
+        "pt_br": "Inverno",
+        "pt": "Inverno",
+        "it": "Inverno",
+        "uk": "Зима"
+      },
+      "description": "A snowman you build for the rings, little snowmen for the days, an igloo that gains an ice block per book for the year goal, a penguin sliding along the bars, frosty tiles for the calendar and the trends, snow and icicles on the covers, and a snowflake that fills out for the challenge.",
+      "descriptions": {
+        "es": "Un muñeco de nieve que construyes para los anillos, muñequitos de nieve para los días, un iglú que gana un bloque de hielo por libro para la meta del año, un pingüino deslizándose por las barras, casillas escarchadas para el calendario y las tendencias, nieve y carámbanos en las portadas, y un copo de nieve que se completa para el reto.",
+        "fr": "Un bonhomme de neige à construire pour les anneaux, de petits bonshommes pour les jours, un igloo qui gagne un bloc de glace par livre pour l’objectif de l’année, un manchot qui glisse le long des barres, des cases givrées pour le calendrier et les tendances, de la neige et des glaçons sur les couvertures, et un flocon qui se dessine pour le défi.",
+        "pt_br": "Um boneco de neve que você monta para os anéis, bonequinhos de neve para os dias, um iglu que ganha um bloco de gelo por livro para a meta do ano, um pinguim deslizando pelas barras, quadros congelados para o calendário e as tendências, neve e pingentes de gelo nas capas, e um floco de neve que se completa para o desafio.",
+        "it": "Un pupazzo di neve da costruire per gli anelli, piccoli pupazzi per i giorni, un igloo che guadagna un blocco di ghiaccio per libro per l’obiettivo dell’anno, un pinguino che scivola lungo le barre, caselle ghiacciate per il calendario e le tendenze, neve e ghiaccioli sulle copertine, e un fiocco di neve che si completa per la sfida."
       },
       "author": "Steven",
       "files": [

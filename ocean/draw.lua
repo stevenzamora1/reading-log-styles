@@ -488,10 +488,45 @@ function D.calendarEmpty(c, x, y, w, h, n, tone, o)
     return true
 end
 
+-- Two rows of waves along the bottom of a cover, foam on the front one.
+local function waves(c, x, y, w, h)
+    local wh = max(6, h * 0.2)
+    local base = floor(y + h)
+    local x0, x1 = floor(x), floor(x + w)
+    for layer = 1, 2 do
+        local top0 = base - wh * (layer == 1 and 1 or 0.6)
+        local amp = wh * (layer == 1 and 0.16 or 0.2)
+        local col = layer == 1 and SEA_L or SEA
+        local ph = layer == 1 and 1.3 or 0
+        for xi = x0, x1 - 1 do
+            local t = (xi - x) / w
+            local top = floor(top0 + amp * sin(t * 2 * pi * 2.2 + ph))
+            if top < base then c:rect(xi, top, 1, base - top, col) end
+        end
+    end
+    -- foam on the crests of the front row
+    local top0, amp = base - wh * 0.6, wh * 0.2
+    local fr = max(1, wh * 0.09)
+    for k = 0, 4 do
+        local t = (k + 0.75) / 2.2
+        if t > 1 then break end
+        local fx = x + w * t
+        local fy = top0 - amp
+        c:disc(fx, fy + fr * 0.4, fr * 1.2, WHITE)
+        c:disc(fx - fr * 1.5, fy + fr * 0.9, fr, WHITE)
+        c:disc(fx + fr * 1.4, fy + fr * 1.0, fr * 0.8, WHITE)
+    end
+    c:rect(x0, base - max(1, floor(wh * 0.12)), x1 - x0, max(1, floor(wh * 0.12)), SEA_D)
+end
+
+function D.bookCover(c, x, y, w, h, tone, o)
+    waves(c, x, y, w, h)
+    return true
+end
+
 function D.calendarCover(c, x, y, w, h, tone, o)
     local s = max(5, min(w, h) * 0.16)
-    star(c, x + w - s * 0.7, y + h - s * 0.7, s + 1, CORAL_D)
-    star(c, x + w - s * 0.7, y + h - s * 0.7, s, CORAL)
+    waves(c, x, y, w, h)
     if o.today then
         bubble(c, x + w * 0.5, y - s * 0.4, max(2, s * 0.45), SEA, tone.bg)
         bubble(c, x + w * 0.5 + s * 0.6, y - s * 1.2, max(1.5, s * 0.3), SEA, tone.bg)
