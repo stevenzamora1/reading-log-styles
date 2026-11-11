@@ -5,7 +5,7 @@
 return {
     api = 1,
     id = "winter",
-    version = "1.0",
+    version = "1.1",
     name = "Winter",
     names = { es = "Invierno", fr = "Hiver", pt_br = "Inverno", pt = "Inverno", it = "Inverno", uk = "Зима" },
     description = "A snowman you build for the rings, little snowmen for the days, an igloo that gains an ice block per book for the year goal, a penguin sliding along the bars, frosty tiles for the calendar and the trends, snow and icicles on the covers, and a snowflake that fills out for the challenge.",

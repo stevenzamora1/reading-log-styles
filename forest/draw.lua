@@ -670,4 +670,39 @@ function D.bookCover(c, x, y, w, h, tone, o)
     return true
 end
 
+-- ─── the Dashboard's tab bar: a branch and a wooden sign ────────────────────
+-- A mossy branch runs along the bottom with a leaf between the tabs; the open
+-- tab is a wooden sign nailed on, with a leaf at its corner.
+function D.tabBar(c, x, y, w, h, cells, tone)
+    local lw = max(2, floor(h * 0.06 + 0.5))
+    local base = y + h * 0.88
+    local bark = tone.dark and BARK or BARK_DARK
+    c:rrect(floor(x), floor(base - lw / 2), floor(w), lw, lw / 2, bark)
+    c:rect(floor(x + lw), floor(base - lw / 2), floor(w - 2 * lw), max(1, floor(lw / 3)), mix(bark, OAK, 0.5))
+    for i = 2, #cells do
+        local lx = cells[i].x
+        c:polyline({ lx, base, lx + h * 0.06, base - h * 0.1 }, max(1, lw * 0.6), bark)
+        leaf(c, lx + h * 0.05, base - h * 0.09, -pi / 2 + 0.6, h * 0.24, h * 0.11, tone.dark and MOSS_LIGHT or MOSS)
+    end
+    for _, cell in ipairs(cells) do
+        if cell.active then
+            local cx = cell.x + cell.w / 2
+            local pw = min(cell.w - 6, cell.label_w + h * 0.7)
+            local ph = h * 0.56
+            local px, py = floor(cx - pw / 2), floor(y + h * 0.46 - ph / 2)
+            c:frame(px, py, floor(pw), floor(ph), ph * 0.12, max(1, floor(lw * 0.7)), BARK_DARK, TAN)
+            for k = 1, 2 do
+                c:rect(px + floor(ph * 0.1), floor(py + ph * k / 3), floor(pw - ph * 0.2), 1, mix(TAN, TAN_DARK, 0.45))
+            end
+            local nr = max(1.5, h * 0.035)
+            c:disc(px + ph * 0.16, py + ph * 0.5, nr, BARK_DARK)
+            c:disc(px + pw - ph * 0.16, py + ph * 0.5, nr, BARK_DARK)
+            leaf(c, px + pw - h * 0.05, py + h * 0.04, -0.6, h * 0.24, h * 0.11, MOSS)
+            cell.color = BARK_DARK
+            cell.dy = -h * 0.04
+        end
+    end
+    return true
+end
+
 return D

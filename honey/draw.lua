@@ -359,4 +359,29 @@ function D.bookCover(c, x, y, w, h, tone, o)
     return true
 end
 
+-- ─── the Dashboard's tab bar: honeycomb ─────────────────────────────────────
+-- Each tab sits in a flat honeycomb cell of wax; the open one is full of
+-- honey, with a bee at its side.
+local function flatHex(c, cx, cy, a, b, col)
+    local k = b * 0.6
+    fillRows(c, cx, cy - b, cy + b, function(yy) return a - k * abs(yy - cy) / b end, col)
+end
+function D.tabBar(c, x, y, w, h, cells, tone)
+    local b = h * 0.32
+    local cy = y + h * 0.5
+    for _, cell in ipairs(cells) do
+        local cx = cell.x + cell.w / 2
+        local a = min(cell.w / 2 - 3, cell.label_w / 2 + h * 0.4)
+        local edge = tone.dark and HONEY_D or WAX_E
+        flatHex(c, cx, cy, a, b, edge)
+        local inner = max(1.5, h * 0.04)
+        flatHex(c, cx, cy, a - inner * 1.4, b - inner, cell.active and HONEY or tone.bg)
+        if cell.active then
+            bee(c, cx + a + h * 0.04, cy - b * 0.9, h * 0.32)
+            cell.color = DOOR
+        end
+    end
+    return true
+end
+
 return D

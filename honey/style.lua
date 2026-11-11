@@ -4,7 +4,7 @@
 return {
     api = 1,
     id = "honey",
-    version = "1.1",
+    version = "1.2",
     name = "Honey",
     names = { es = "Miel", fr = "Miel", pt_br = "Mel", pt = "Mel", it = "Miele", uk = "Мед" },
     description = "A beehive that fills with honey for the rings, little hives for the days, a honeycomb for the year goal, a bee flying along the bars, honeycomb cells for the calendar and the trends, and a honey jar for the challenge.",

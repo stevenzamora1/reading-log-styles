@@ -470,4 +470,37 @@ function D.bookCover(c, x, y, w, h, tone, o)
     return true
 end
 
+-- ─── the Dashboard's tab bar: snow and icicles ──────────────────────────────
+-- A drift of snow along the top with icicles hanging from it; the open tab
+-- is a frosted pane with a snowflake.
+function D.tabBar(c, x, y, w, h, cells, tone)
+    local snow = tone.dark and SNOW or SNOW_D
+    local sh = max(3, floor(h * 0.1))
+    local top = floor(y + h * 0.02)
+    c:rrect(floor(x), top, floor(w), sh, sh / 2, snow)
+    local n = max(6, floor(w / (h * 0.45)))
+    for k = 1, n do
+        local ix = x + w * (k - 0.5) / n
+        local len = h * (0.1 + 0.1 * ((k * 7) % 3) / 2)
+        local half = max(1, h * 0.03)
+        fillRows(c, ix, top + sh - 1, top + sh + len, function(yy) return half * (1 - (yy - top - sh) / len) end,
+            tone.dark and ICE_L or ICE)
+    end
+    for _, cell in ipairs(cells) do
+        if cell.active then
+            local cx = cell.x + cell.w / 2
+            local fr = h * 0.11
+            local pw = min(cell.w - 6, cell.label_w + h * 0.6 + fr * 2.4)
+            local ph = h * 0.5
+            local px, py = floor(cx - pw / 2), floor(y + h * 0.6 - ph / 2)
+            c:frame(px, py, floor(pw), floor(ph), ph * 0.25, max(1, floor(h * 0.035)), ICE, ICE_L)
+            flake(c, px + ph * 0.48, py + ph / 2, fr, ICE_D)
+            cell.color = NIGHT
+            cell.dx = fr * 1.1
+            cell.dy = h * 0.1
+        end
+    end
+    return true
+end
+
 return D

@@ -526,4 +526,38 @@ function D.bar(c, x, y, w, h, frac, tone, fill)
     c:disc(rx + a * 0.25, mid, max(1, b * 0.45), CYAN)
 end
 
+-- ─── the Dashboard's tab bar: a strip of stars ──────────────────────────────
+-- Little stars and twinkles scattered along the row; the open tab is a
+-- glowing capsule with a ringed planet at its side.
+function D.tabBar(c, x, y, w, h, cells, tone)
+    local seed = 7
+    local function rnd() seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648 end
+    local cols = { GOLD, CYAN_L, VIOLET_L, WHITE }
+    local count = max(6, floor(w / (h * 0.7)))
+    for k = 1, count do
+        local sx = x + w * (k - 0.5 + (rnd() - 0.5) * 0.8) / count
+        local sy = (k % 2 == 0) and (y + h * (0.08 + rnd() * 0.1)) or (y + h * (0.84 + rnd() * 0.1))
+        local col = tone.dark and cols[k % #cols + 1] or mix(cols[k % #cols + 1], { 0, 0, 0 }, 0.4)
+        if k % 3 == 0 then twinkle(c, sx, sy, max(2, h * 0.06), col)
+        else c:disc(sx, sy, max(1, h * 0.025), col) end
+    end
+    for _, cell in ipairs(cells) do
+        if cell.active then
+            local cx = cell.x + cell.w / 2
+            local pr = h * 0.1
+            local pw = min(cell.w - 6, cell.label_w + h * 0.6 + pr * 4.4)
+            local ph = h * 0.54
+            local px, py = floor(cx - pw / 2), floor(y + h * 0.5 - ph / 2)
+            c:frame(px, py, floor(pw), floor(ph), ph / 2, max(2, floor(h * 0.04)), VIOLET,
+                tone.dark and mix(VIOLET_D, tone.bg, 0.55) or mix(VIOLET_L, tone.bg, 0.6))
+            local plx, ply = px + ph * 0.5, py + ph / 2
+            c:disc(plx, ply, pr, CYAN)
+            c:polyline({ plx - pr * 1.7, ply + pr * 0.5, plx + pr * 1.7, ply - pr * 0.5 }, max(1, pr * 0.3), GOLD)
+            cell.color = tone.fg
+            cell.dx = pr * 1.9
+        end
+    end
+    return true
+end
+
 return D

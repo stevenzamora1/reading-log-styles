@@ -4,7 +4,7 @@
 return {
     api = 1,
     id = "forest",
-    version = "1.1",
+    version = "1.2",
     name = "Forest",
     names = { es = "Bosque", fr = "Forêt", pt_br = "Floresta", pt = "Floresta", it = "Bosco", uk = "Ліс" },
     description = "A pine tree whose tiers fill for the rings, small pines for the days, a snail on a mossy branch for the bars, a woodpile that gains a log per book for the year goal, trees for the charts, wooden signs for the trends and an acorn that grows into an oak for the challenge.",

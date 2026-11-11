@@ -636,4 +636,35 @@ function D.bar(c, x, y, w, h, frac, tone, fill)
     fish(c, fx, mid - h * 0.1, fl, CORAL, CORAL_D)
 end
 
+-- ─── the Dashboard's tab bar: a wave and a buoy ─────────────────────────────
+-- A wave rolls along the bottom; the open tab floats on it as a striped buoy
+-- with a couple of bubbles.
+function D.tabBar(c, x, y, w, h, cells, tone)
+    local lw = max(2, floor(h * 0.05 + 0.5))
+    local base = y + h * 0.9
+    local pts = {}
+    local n = max(24, floor(w / 8))
+    local waves_n = max(4, floor(w / (h * 1.2)))
+    for k = 0, n do
+        local f = k / n
+        pts[#pts + 1] = x + w * f
+        pts[#pts + 1] = base + h * 0.04 * sin(f * pi * 2 * waves_n)
+    end
+    c:polyline(pts, lw, tone.dark and SEA_L or SEA)
+    for _, cell in ipairs(cells) do
+        if cell.active then
+            local cx = cell.x + cell.w / 2
+            local pw = min(cell.w - 6, cell.label_w + h * 0.6)
+            local ph = h * 0.56
+            local px, py = floor(cx - pw / 2), floor(y + h * 0.48 - ph / 2)
+            c:frame(px, py, floor(pw), floor(ph), ph / 2, max(2, floor(ph * 0.1)), WHITE, CORAL)
+            bubble(c, px + pw + h * 0.08, py + h * 0.02, max(2, h * 0.06), tone.dark and SEA_L or SEA, tone.bg)
+            bubble(c, px + pw + h * 0.17, py - h * 0.08, max(1.5, h * 0.04), tone.dark and SEA_L or SEA, tone.bg)
+            cell.color = WHITE
+            cell.dy = -h * 0.02
+        end
+    end
+    return true
+end
+
 return D

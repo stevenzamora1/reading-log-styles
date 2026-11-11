@@ -4,7 +4,7 @@
 return {
     api = 1,
     id = "christmas",
-    version = "1.1",
+    version = "1.2",
     name = "Christmas",
     names = { es = "Navidad", fr = "Noël", pt_br = "Natal", pt = "Natal", it = "Natale" },
     description = "A wreath and candy cane for the rings, baubles for the days, a tree for the year goal, presents for the bars, lights for the lines, an advent calendar and a present that opens to a book for the challenge.",

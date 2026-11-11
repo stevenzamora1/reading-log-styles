@@ -469,4 +469,44 @@ function D.bar(c, x, y, w, h, frac, tone)
     end
 end
 
+-- ─── the Dashboard's tab bar: a garland ─────────────────────────────────────
+-- A garland of fir swags along the top with baubles where they meet; the open
+-- tab is a red ribbon tied with a gold bow.
+function D.tabBar(c, x, y, w, h, cells, tone)
+    local lw = max(2, floor(h * 0.07 + 0.5))
+    local top, sag = y + h * 0.05, h * 0.12
+    for _, cell in ipairs(cells) do
+        local pts = {}
+        for k = 0, 16 do
+            local f = k / 16
+            pts[#pts + 1] = cell.x + cell.w * f
+            pts[#pts + 1] = top + sag * sin(pi * f)
+        end
+        c:polyline(pts, lw, tone.dark and PINE or GREEN)
+    end
+    local r = max(2, h * 0.065)
+    for i = 1, #cells + 1 do
+        local bx = i <= #cells and cells[i].x or (cells[#cells].x + cells[#cells].w)
+        bx = min(max(bx, x + r), x + w - r)
+        c:polyline({ bx, top, bx, top + r * 0.8 }, max(1, r * 0.3), GOLDDARK)
+        c:disc(bx, top + r * 1.6, r, BAUBLES[(i - 1) % #BAUBLES + 1])
+        c:disc(bx - r * 0.3, top + r * 1.3, max(0.8, r * 0.28), WHITE)
+    end
+    for _, cell in ipairs(cells) do
+        if cell.active then
+            local cx = cell.x + cell.w / 2
+            local pw = min(cell.w - 4, cell.label_w + h * 0.6)
+            local ph = h * 0.5
+            local py = y + h * 0.56 - ph / 2
+            c:rrect(floor(cx - pw / 2), floor(py), floor(pw), floor(ph), ph * 0.2, RED)
+            c:rect(floor(cx - pw / 2), floor(py + ph * 0.1), floor(pw), max(1, floor(ph * 0.06)), DEEPRED)
+            c:rect(floor(cx - pw / 2), floor(py + ph * 0.84), floor(pw), max(1, floor(ph * 0.06)), DEEPRED)
+            bow(c, cx + pw / 2 - h * 0.08, py + h * 0.02, h * 0.1, GOLD)
+            cell.color = CREAM
+            cell.dy = h * 0.06
+        end
+    end
+    return true
+end
+
 return D

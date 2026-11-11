@@ -768,4 +768,33 @@ function D.bookCover(c, x, y, w, h, tone, o)
     return true
 end
 
+-- ─── the Dashboard's tab bar: a wrought-iron fence ──────────────────────────
+-- An iron rail with spear-tipped posts between the tabs; the open tab stands
+-- in a pointed arch.
+function D.tabBar(c, x, y, w, h, cells, tone)
+    local iron = tone.dark and IRON or mix(IRON, { 0, 0, 0 }, 0.4)
+    local lw = max(2, floor(h * 0.05 + 0.5))
+    local base = floor(y + h * 0.9)
+    c:rect(floor(x), base, floor(w), lw, iron)
+    local top = y + h * 0.22
+    local function post(px)
+        c:rect(floor(px - lw / 2), floor(top), lw, base - floor(top), iron)
+        diamond(c, px, top - h * 0.03, max(2, h * 0.07), iron)
+    end
+    post(x + lw); post(x + w - lw)
+    for i = 2, #cells do post(cells[i].x) end
+    for _, cell in ipairs(cells) do
+        if cell.active then
+            local cx = cell.x + cell.w / 2
+            local a = min(cell.w * 0.42, cell.label_w / 2 + h * 0.32)
+            local ah = h * 0.62
+            arch(c, cx, y + h * 0.04, base, a, ah, WINE)
+            c:polyline(archLine(cx, y + h * 0.04, base, a, ah), max(1.5, lw * 0.8), CRIMSON)
+            cell.color = { 255, 228, 238 }
+            cell.dy = h * 0.06
+        end
+    end
+    return true
+end
+
 return D

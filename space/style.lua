@@ -4,7 +4,7 @@
 return {
     api = 1,
     id = "space",
-    version = "1.1",
+    version = "1.2",
     name = "Space",
     names = { es = "Espacio", fr = "Espace", pt_br = "Espaço", pt = "Espaço", it = "Spazio", uk = "Космос" },
     description = "The moon waxing in the middle with a comet flying round it for the rings, the moon waxing to full for the days, a rocket along the bars, a star cluster that lights a star per book for the year goal, little planets for the calendar and a spiral galaxy whose stars light up for the challenge.",
