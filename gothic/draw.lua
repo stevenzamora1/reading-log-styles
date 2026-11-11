@@ -556,20 +556,64 @@ end
 
 -- ─── blood dripping from the top of a cover ─────────────────────────────────
 
-local DRIPS = { { 0.07, 0.2, 0.05 }, { 0.19, 0.11, 0.04 }, { 0.33, 0.3, 0.055 }, { 0.48, 0.15, 0.04 },
-                { 0.62, 0.25, 0.05 }, { 0.77, 0.09, 0.035 }, { 0.9, 0.36, 0.06 } }
+-- Blood running down from the top edge: a band with a wavy lower edge, and
+-- drips that taper to a rounded end, drawn a column at a time.
+local DRIPS = { { 0.1, 0.17, 0.055 }, { 0.3, 0.33, 0.07 }, { 0.47, 0.12, 0.045 },
+                { 0.66, 0.24, 0.06 }, { 0.86, 0.4, 0.075 } }
 
 local function blood(c, x, y, w, h)
-    local band = max(2, h * 0.035)
-    c:rect(floor(x), floor(y), floor(w), floor(band), DEEP)
-    for _, d in ipairs(DRIPS) do
-        local dw = max(2, w * d[3])
-        local dx = x + w * d[1]
-        local len = max(band * 2, h * d[2])
-        c:rect(floor(dx - dw / 2), floor(y), max(2, floor(dw)), floor(len), DEEP)
-        -- a little shine down the drip
-        c:rect(floor(dx - dw * 0.3), floor(y + band), max(1, floor(dw * 0.22)), floor(len * 0.75), CRIMSON)
+    local b0 = max(2, h * 0.03)
+    local x0, x1 = floor(x), floor(x + w)
+    local shine = {}
+    for xi = x0, x1 - 1 do
+        local t = (xi - x) / w
+        local depth = b0 * (1 + 0.35 * sin(t * 17) + 0.2 * sin(t * 41 + 1))
+        for _, d in ipairs(DRIPS) do
+            local hw = max(1.5, w * d[3] / 2)
+            local u = (xi + 0.5 - (x + w * d[1])) / hw
+            if abs(u) < 1 then
+                depth = max(depth, h * d[2] * sqrt(1 - u * u))
+                if u > -0.55 and u < -0.25 then shine[xi] = h * d[2] * 0.7 end
+            end
+            -- a smooth widening where the drip leaves the band
+            local v = abs(u) / 2.6
+            if v < 1 then depth = max(depth, b0 * (1.2 + 1.4 * (1 - v) * (1 - v))) end
+        end
+        c:rect(xi, floor(y), 1, max(1, floor(depth + 0.5)), DEEP)
     end
+    for xi, len in pairs(shine) do
+        c:rect(xi, floor(y + b0 * 1.5), 1, max(1, floor(len - b0 * 1.5)), CRIMSON)
+    end
+end
+
+-- A bat with its wings out, s = half its wingspan, drawn a column at a time
+-- with a pale edge so it shows on a dark card too.
+local function bat(c, cx, cy, s, edge)
+    local function rows(a)
+        if a < 0.13 then
+            -- the head and body, the ears pointing up
+            local top = -0.3
+            if a > 0.03 and a < 0.12 then top = -0.3 - 0.18 * (1 - abs(a - 0.075) / 0.045) end
+            return top, 0.32 - a * 0.6
+        end
+        -- the wings: rising to the tips, scalloped underneath between the fingers
+        local top = -0.12 - 0.5 * a
+        local bottom = 0.3 - 0.62 * a - 0.14 * abs(sin((a - 0.13) / 0.87 * pi * 3))
+        return top, max(top + 0.04, bottom)
+    end
+    for pass = 1, 2 do
+        local grow = pass == 1 and max(1, s * 0.06) or 0
+        local col = pass == 1 and edge or { 20, 10, 18 }
+        local x0, x1 = floor(cx - s - grow), floor(cx + s + grow)
+        for xi = x0, x1 do
+            local a = min(1, abs(xi + 0.5 - cx) / s)
+            local top, bottom = rows(a)
+            c:rect(xi, floor(cy + top * s - grow), 1, max(1, floor((bottom - top) * s + 2 * grow)), col)
+        end
+    end
+    local er = max(0.8, s * 0.045)
+    c:disc(cx - s * 0.06, cy - s * 0.22, er, CRIMSON)
+    c:disc(cx + s * 0.06, cy - s * 0.22, er, CRIMSON)
 end
 
 function D.calendarCover(c, x, y, w, h, tone, o)
@@ -716,6 +760,11 @@ end
 
 function D.bookCover(c, x, y, w, h, tone, o)
     blood(c, x, y, w, h)
+    -- two bats flying off the sides of the cover, low down where there's
+    -- nothing written beside it
+    local s = max(8, w * 0.14)
+    bat(c, x + w + s * 0.2, y + h * 0.97, s, mix(IRON, tone.bg, 0.2))
+    bat(c, x - s * 0.25, y + h * 0.62, s * 0.6, mix(IRON, tone.bg, 0.2))
     return true
 end
 

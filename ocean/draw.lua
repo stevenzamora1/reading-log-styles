@@ -241,11 +241,15 @@ function D.day(c, cx, cy, d, fp, fm, tone, o)
     lighthouseEmpty(c, cx, cy, R, tone)
     local f = min(1, fp or 0)
     if f > 0 then
+        -- in the same colours as the big lighthouse: the card's pages colour
+        -- for the base, its minutes colour for the tower
+        local series = tone.series or {}
+        local cols = { series[1] or FILLS[1], series[2] or FILLS[2], FILLS[3] }
         local top, bottom = cy + PARTS[3][1] * R, cy + PARTS[1][2] * R
         local level = bottom - (bottom - top) * f
         for i = 1, 3 do
             local y0, y1, half = partHalf(cy, R, PARTS[i])
-            if level < y1 then fillRows(c, cx, max(y0, level), y1, half, FILLS[i]) end
+            if level < y1 then fillRows(c, cx, max(y0, level), y1, half, cols[i]) end
         end
     end
     stripes(c, cx, cy, R)

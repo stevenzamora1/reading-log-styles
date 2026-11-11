@@ -4,7 +4,7 @@
 return {
     api = 1,
     id = "gothic",
-    version = "1.2",
+    version = "1.4",
     name = "Gothic",
     names = { es = "Gótico", fr = "Gothique", pt_br = "Gótico", pt = "Gótico", it = "Gotico", uk = "Готика" },
     description = "A rose that fills in with your pages inside a thorny vine that grows with your minutes for the rings, roses that gain a ring of thorns on days you meet both goals, barbed wire for the bars, a vial in an arch for the year goal, pointed arches for the charts and a spider spinning its web for the challenge.",
