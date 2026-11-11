@@ -1,37 +1,42 @@
 # Reading Log styles
 
-Styles you can download from inside [Reading Log](https://github.com/stevenzamora1/reading-log)
-(1.5.0 or newer): Tools > Reading Log > Styles and colours > **Get more
-styles…**. The plugin reads
-`index.json` here and downloads a style's files from its folder. Nothing
-needs a new release: a style is live as soon as it's on the `main` branch.
+**Styles you can download for [Reading Log](https://github.com/stevenzamora1/reading-log),
+the reading dashboard for KOReader.** Each one redraws the activity rings,
+the days of the week, the goals, the progress bars, the Monthly challenge,
+the calendar, the book covers and the Dashboard's tabs, and brings its own
+colours.
 
-```
-index.json            the list the plugin shows
-christmas/
-  style.lua           name, theme colours, card looks
-  draw.lua            drawings (optional)
-gothic/
-  style.lua
-  draw.lua
-forest/
-  style.lua
-  draw.lua
-ocean/
-  style.lua
-  draw.lua
-space/
-  style.lua
-  draw.lua
-honey/
-  style.lua
-  draw.lua
-winter/
-  style.lua
-  draw.lua
-```
+<p align="center">
+  <img src="images/gothic.png" width="24%" alt="Gothic">
+  <img src="images/christmas.png" width="24%" alt="Christmas">
+  <img src="images/forest.png" width="24%" alt="Forest">
+  <img src="images/ocean.png" width="24%" alt="Ocean">
+</p>
+<p align="center">
+  <img src="images/space.png" width="24%" alt="Space">
+  <img src="images/honey.png" width="24%" alt="Honey">
+  <img src="images/winter.png" width="24%" alt="Winter">
+  <img src="images/gothic-calendar.png" width="24%" alt="Gothic's calendar">
+</p>
 
-## Styles here
+## Get them
+
+On your reader, with Reading Log 1.5.0 or newer: Tools > Reading Log >
+Styles and colours > **Get more styles…**. Tap a style to download it; it
+shows up in the Style list next to Default, Cute, Cyber and Dark Academia.
+Tap it again later to update it or remove it.
+
+Any style can also go on White, Dark or Paper instead of its own colours:
+Styles and colours > **Colours**.
+
+Nothing here needs a new Reading Log release: a style is live as soon as
+it's on the `main` branch.
+
+<p align="center">
+  <img src="images/tab-bars.png" width="80%" alt="Each style's tab bar for the Dashboard">
+</p>
+
+## The styles
 
 | Style | What it draws |
 | --- | --- |
@@ -68,6 +73,19 @@ built-in styles off the Style list or puts them back, and deletes
 downloaded styles from the device (they can be downloaded again).
 
 ## Add a style
+
+What's in here:
+
+```
+index.json            the list the plugin shows
+images/               the screenshots in this README
+christmas/
+  style.lua           name, colours, card looks
+  draw.lua            drawings (optional)
+gothic/  forest/  ocean/  space/  honey/  winter/
+                      the same two files each
+```
+
 
 1. Make a folder named after the style's id: lower case, `a-z`, `0-9` and
    `_` only (`gothic`, `winter_night`).
