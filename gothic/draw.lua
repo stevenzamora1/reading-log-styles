@@ -635,7 +635,8 @@ end
 -- in as the month's goal fills, the spider at the thread it is spinning.
 -- Done: the spider sits in the middle.
 
-local function spider(c, x, y, s, ang, tone)
+local function spider(c, x, y, s, ang, tone, body)
+    body = body or SILVER
     local lw = max(1, s * 0.13)
     for side = -1, 1, 2 do
         for k = 0, 3 do
@@ -647,8 +648,8 @@ local function spider(c, x, y, s, ang, tone)
     end
     -- the abdomen behind, the head in front (facing ang)
     local bx, by = x - s * 0.45 * cos(ang), y - s * 0.45 * sin(ang)
-    c:disc(bx, by, s * 0.5, SILVER)
-    c:disc(x + s * 0.18 * cos(ang), y + s * 0.18 * sin(ang), s * 0.28, SILVER)
+    c:disc(bx, by, s * 0.5, body)
+    c:disc(x + s * 0.18 * cos(ang), y + s * 0.18 * sin(ang), s * 0.28, body)
     -- a crimson mark on its back
     c:disc(bx, by, max(1, s * 0.17), CRIMSON)
 end
@@ -660,6 +661,13 @@ function D.challenge(c, cx, cy, R, frac, tone)
     local thin = max(1, R * 0.012)
     local lw = max(1, R * 0.022)
     local frame = mix(IRON, tone.bg, 0.45)
+    -- The silk: silver on a dark card. On a light one (White or Paper) silver
+    -- hardly shows, so it is spun in the card's accent colour instead, the
+    -- colour of its heading (Styles and colours picks it; the card's own
+    -- Card colour > accents swapped takes the other one), the spider in dark
+    -- iron.
+    local silk = tone.dark and SILVER or (tone.accent or mix(IRON, { 0, 0, 0 }, 0.3))
+    local body = tone.dark and SILVER or mix(IRON, { 0, 0, 0 }, 0.4)
     local function ang(i) return -pi / 2 + 2 * pi * i / spokes end
     -- the frame and the spokes
     for i = 0, spokes - 1 do
@@ -684,7 +692,7 @@ function D.challenge(c, cx, cy, R, frac, tone)
         for i = 0, spokes - 1 do
             local n = k * spokes + i
             if n < done_segs then
-                seg(r, i, SILVER, lw)
+                seg(r, i, silk, lw)
                 last_r, last_i = r, i + 1
             else
                 seg(r, i, mix(frame, tone.bg, 0.5), thin)
@@ -692,19 +700,19 @@ function D.challenge(c, cx, cy, R, frac, tone)
         end
     end
     -- the hub
-    c:disc(cx, cy, max(1.5, R * 0.035), SILVER)
+    c:disc(cx, cy, max(1.5, R * 0.035), silk)
     local s = max(5, R * 0.16)
     if frac >= 1 then
-        spider(c, cx, cy, s, -pi / 2, tone)
+        spider(c, cx, cy, s, -pi / 2, tone, body)
     elseif last_r then
         local a = ang(last_i)
         local sx, sy = at(cx, cy, last_r, a)
-        spider(c, sx, sy, s, a + pi / 2, tone)
+        spider(c, sx, sy, s, a + pi / 2, tone, body)
     else
         -- not started: hanging from a thread at the top
         local sx, sy = cx, cy - Rw - s * 0.2
-        c:polyline({ sx, cy - R * 1.02, sx, sy }, thin, SILVER)
-        spider(c, sx, sy + s * 0.6, s, pi / 2, tone)
+        c:polyline({ sx, cy - R * 1.02, sx, sy }, thin, silk)
+        spider(c, sx, sy + s * 0.6, s, pi / 2, tone, body)
     end
 end
 

@@ -87,7 +87,7 @@
     },
     {
       "id": "gothic",
-      "version": "1.5",
+      "version": "1.6",
       "api": 1,
       "name": "Gothic",
       "names": {
@@ -234,6 +234,32 @@
         "fr": "Un bonhomme de neige à construire pour les anneaux, de petits bonshommes pour les jours, un igloo qui gagne un bloc de glace par livre pour l’objectif de l’année, un manchot qui glisse le long des barres, des cases givrées pour le calendrier et les tendances, de la neige et des glaçons sur les couvertures, et un flocon qui se dessine pour le défi.",
         "pt_br": "Um boneco de neve que você monta para os anéis, bonequinhos de neve para os dias, um iglu que ganha um bloco de gelo por livro para a meta do ano, um pinguim deslizando pelas barras, quadros congelados para o calendário e as tendências, neve e pingentes de gelo nas capas, e um floco de neve que se completa para o desafio.",
         "it": "Un pupazzo di neve da costruire per gli anelli, piccoli pupazzi per i giorni, un igloo che guadagna un blocco di ghiaccio per libro per l’obiettivo dell’anno, un pinguino che scivola lungo le barre, caselle ghiacciate per il calendario e le tendenze, neve e ghiaccioli sulle copertine, e un fiocco di neve che si completa per la sfida."
+      },
+      "author": "Steven",
+      "files": [
+        "style.lua",
+        "draw.lua"
+      ]
+    },
+    {
+      "id": "dachshund",
+      "version": "1.0",
+      "api": 1,
+      "name": "Dachshund",
+      "names": {
+        "es": "Salchicha",
+        "fr": "Teckel",
+        "pt_br": "Salsicha",
+        "pt": "Teckel",
+        "it": "Bassotto",
+        "uk": "Такса"
+      },
+      "description": "A dachshund curled round for the rings (pages stretch it, minutes wag its tail, the streak knits it a sweater), little dog faces for the days, a bowl of kibble for the year goal, a sausage dog that gets longer along the bars, a hot dog for the challenge, paw-print days on the calendar and a dog peeking over the covers.",
+      "descriptions": {
+        "es": "Un perro salchicha enroscado para los anillos (las páginas lo estiran, los minutos le mueven la cola, la racha le teje un suéter), caritas de perro para los días, un plato de croquetas para la meta del año, un perro salchicha que se alarga en las barras, un hot dog para el reto, huellas en el calendario y un perro asomándose sobre las portadas.",
+        "fr": "Un teckel enroulé pour les anneaux (les pages l’allongent, les minutes font remuer sa queue, la série lui tricote un pull), de petites têtes de chien pour les jours, une gamelle de croquettes pour l’objectif de l’année, un teckel qui s’allonge le long des barres, un hot-dog pour le défi, des empreintes sur le calendrier et un chien qui dépasse des couvertures.",
+        "pt_br": "Um salsicha enrolado para os anéis (as páginas o esticam, os minutos abanam o rabo, a sequência tricota um suéter), carinhas de cachorro para os dias, uma tigela de ração para a meta do ano, um salsicha que cresce nas barras, um cachorro-quente para o desafio, patinhas no calendário e um cachorro espiando por cima das capas.",
+        "it": "Un bassotto acciambellato per gli anelli (le pagine lo allungano, i minuti gli fanno scodinzolare la coda, la serie gli fa un maglione), musetti di cane per i giorni, una ciotola di crocchette per l’obiettivo dell’anno, un bassotto che si allunga lungo le barre, un hot dog per la sfida, impronte sul calendario e un cane che sbircia dalle copertine."
       },
       "author": "Steven",
       "files": [
