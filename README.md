@@ -16,7 +16,7 @@ colours.
   <img src="images/space.png" width="24%" alt="Space">
   <img src="images/honey.png" width="24%" alt="Honey">
   <img src="images/winter.png" width="24%" alt="Winter">
-  <img src="images/gothic-calendar.png" width="24%" alt="Gothic's calendar">
+  <img src="images/dachshund.png" width="24%" alt="Dachshund">
 </p>
 
 ## Get them
@@ -47,6 +47,7 @@ it's on the `main` branch.
 | **Space** | The moon waxing in the middle (pages) with a comet flying round it (minutes) for the rings, the moon waxing for the days, a rocket along the progress bars, a star cluster that lights a star per book for the year goal, columns of light for the bar charts, stars and little planets for the lines, twinkles on Today's timeline, ringed planets for Reading trends and the calendar, a spiral galaxy whose stars light up for the challenge; stars spilling over the covers on Continue reading and the calendar, with a comet across the corner; stars along the Dashboard's tabs, the open one a capsule with a ringed planet. |
 | **Honey** | A straw beehive for the rings (its three bands fill with pages, minutes and the streak; a bee comes out once the streak is full), little hives for the days, a honeycomb whose cells fill per book for the year goal, a bee along a honey drip for the progress bars, honeycomb cells for the calendar and Reading trends, and a honey jar filling for the challenge; honeycomb and bees on the cover on Continue reading; honeycomb cells for the Dashboard's tabs, the open one full of honey with a bee. |
 | **Winter** | A snowman for the rings (it packs with snow with your pages, gets its face (scarf, eyes, carrot nose) with your minutes, and its top hat fills with the streak), little snowmen for the days, an igloo that gains an ice block per book for the year goal, a penguin sliding along the progress bars, frosty panes for the calendar, snowflake tiles for Reading trends, snow and icicles on the covers on Continue reading and the calendar, and a snowflake whose arms grow out and frost in for the challenge; snow and icicles along the Dashboard's tabs, the open one a frosted pane with a snowflake. |
+| **Dachshund** | A big paw print on a bone for the rings (pages fill the pad from the bottom, minutes fill a toe for every quarter, the streak fills the bone), little paw prints for the days whose pads and toes fill with your pages and minutes, a bowl of kibble that gains a piece per book for the year goal, a sausage dog that gets longer along the progress bars, a hot dog that cooks and gets its ketchup and mustard for the challenge, paw-print days and paws over the covers on the calendar, a dog peeking over the cover on Continue reading, and a very long dachshund under the Dashboard's tabs, the open one on a bone tag. |
 
 On the reader, a downloaded style goes to
 `koreader/settings/readinglog/styles/<id>/`. You can also copy a style's
@@ -82,7 +83,7 @@ images/               the screenshots in this README
 christmas/
   style.lua           name, colours, card looks
   draw.lua            drawings (optional)
-gothic/  forest/  ocean/  space/  honey/  winter/
+gothic/  forest/  ocean/  space/  honey/  winter/  dachshund/
                       the same two files each
 ```
 
